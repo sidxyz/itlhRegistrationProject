@@ -16,6 +16,7 @@ var app = {
 //  style-src 'self' 'unsafe-inline'; `;
 //  console.log("csr is as follows===>");
 //  console.log(contentOfSecurityPolicy);
+
 var loginButton = document.getElementById("loginButton");
 loginButton.addEventListener('click',checkLogin);
 
@@ -29,11 +30,11 @@ function checkLogin()
 
     $.ajax(
         {
-            url:"https://b7aec922.ngrok.io/login",
+            url:"https://b7aec922.ngrok.io/custom-login",
             type:'POST',
             data:JSON.stringify(postData),
             success:successfulLoginResponse,
-            contentType:'application/x-www-form-urlencoded'
+            contentType:'application/json'
         }
     )
 }
@@ -46,7 +47,7 @@ function successfulLoginResponse(response)
     {
         //alert("Logged in Successfully");
         //window.location='home.html';
-        window.location.href = 'home.html';
+        window.location.href = 'addProduct.html';
     }
     else
     {

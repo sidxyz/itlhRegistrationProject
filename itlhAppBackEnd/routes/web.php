@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/custom-login', 'MobileController@login')->name('custom-login');
+
+Route::post('/addProduct', 'MobileController@addProduct')->name('addProduct');

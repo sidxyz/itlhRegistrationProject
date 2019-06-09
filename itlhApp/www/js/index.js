@@ -8,25 +8,49 @@ var app = {
     }
 };
 
+
+// baseUrl='https://b7aec922.ngrok.io';
+// var contentOfSecurityPolicy = `default-src 'self' 
+//  `+baseUrl+` 
+//  data: gap: ms-appdata: https://ssl.gstatic.com 'unsafe-eval';
+//  style-src 'self' 'unsafe-inline'; `;
+//  console.log("csr is as follows===>");
+//  console.log(contentOfSecurityPolicy);
 var loginButton = document.getElementById("loginButton");
 loginButton.addEventListener('click',checkLogin);
 
-//constant login credentials
-var superusername = "admin@gmail.com";
-var superuserpwd = "administrator";
 
 function checkLogin()
 {
-    if(document.getElementById("userName").value == superusername &&
-       document.getElementById("password").value == superuserpwd)
-       {
-            alert("Login was successful!");
-       }
-       else
-       {
-            alert("Please check your credentials!");
-       }
+    var postData = {
+        email : document.getElementById("userName").value,
+        password : document.getElementById("password").value
+    };
 
+    $.ajax(
+        {
+            url:"https://b7aec922.ngrok.io/login",
+            type:'POST',
+            data:JSON.stringify(postData),
+            success:successfulLoginResponse,
+            contentType:'application/x-www-form-urlencoded'
+        }
+    )
 }
 
+function successfulLoginResponse(response)
+{
+    console.log(response);
+
+    if(response=="success")
+    {
+        //alert("Logged in Successfully");
+        //window.location='home.html';
+        window.location.href = 'home.html';
+    }
+    else
+    {
+        alert("please check your credentials");
+    }
+}
 app.initialize();
